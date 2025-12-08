@@ -1,0 +1,139 @@
+.agent-panel {
+  position: fixed;
+  right: 20px;
+  top: 80px;
+  width: 350px;
+  max-height: calc(100vh - 100px);
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  transition: all 0.3s;
+  z-index: 100;
+}
+
+.agent-panel.collapsed {
+  max-height: 60px;
+}
+
+.agent-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  cursor: pointer;
+  user-select: none;
+}
+
+.agent-header-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.agent-icon {
+  font-size: 1.5rem;
+}
+
+.agent-title {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.message-badge {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.toggle-icon {
+  font-size: 0.875rem;
+}
+
+.agent-panel-content {
+  max-height: calc(100vh - 160px);
+  overflow-y: auto;
+}
+
+.agent-empty {
+  padding: 2rem 1.5rem;
+  text-align: center;
+  color: #999;
+}
+
+.agent-empty p {
+  margin: 0.5rem 0;
+}
+
+.agent-hint {
+  font-size: 0.875rem;
+  color: #bbb;
+}
+
+.agent-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.agent-message {
+  padding: 1rem;
+  border-radius: 12px;
+  border-left: 4px solid;
+  background: #f8f9ff;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.agent-message-question {
+  border-left-color: #667eea;
+  background: #f0f3ff;
+}
+
+.agent-message-suggestion {
+  border-left-color: #4ecdc4;
+  background: #f0fffe;
+}
+
+.agent-message-feedback {
+  border-left-color: #98d8c8;
+  background: #f5fff0;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.message-type {
+  font-weight: 600;
+  color: #667eea;
+}
+
+.message-time {
+  color: #999;
+}
+
+.message-content {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #333;
+}

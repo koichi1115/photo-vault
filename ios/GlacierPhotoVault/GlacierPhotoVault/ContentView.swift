@@ -1,0 +1,186 @@
+//
+//  ContentView.swift
+//  GlacierPhotoVault
+//
+//  デジタル庁デザインシステム（DADS）準拠
+//
+
+import SwiftUI
+
+struct ContentView: View {
+    @StateObject private var viewModel = PhotoViewModel()
+    @State private var showingUploadSheet = false
+
+    var body: some View {
+        NavigationView {
+            ZStack {
+                DADSColor.backgroundGray
+                    .ignoresSafeArea()
+
+                ScrollView {
+                    VStack(spacing: DADSSpacing.lg) {
+                        // Stats Section
+                        if let stats = viewModel.stats {
+                            StatsView(stats: stats)
+                                .padding(.horizontal, DADSSpacing.md)
+                        }
+
+                        // Photos List
+                        if viewModel.isLoading && viewModel.photos.isEmpty {
+                            ProgressView("読み込み中...")
+                                .font(DADSTypography.body)
+                                .foregroundColor(DADSColor.textSecondary)
+                                .padding(DADSSpacing.xl)
+                        } else if viewModel.photos.isEmpty {
+                            EmptyStateView()
+                                .padding(DADSSpacing.md)
+                        } else {
+                            LazyVStack(spacing: DADSSpacing.md) {
+                                ForEach(viewModel.photos) { photo in
+                                    PhotoCardView(photo: photo, viewModel: viewModel)
+                                }
+                            }
+                            .padding(.horizontal, DADSSpacing.md)
+                        }
+                    }
+                    .padding(.vertical, DADSSpacing.md)
+                }
+                .refreshable {
+                    await viewModel.refresh()
+                }
+
+                // Error Message (Toast)
+                if let errorMessage = viewModel.errorMessage {
+                    VStack {
+                        Spacer()
+                        HStack {
+                            Image(systemName: "exclamationmark.circle.fill")
+                                .foregroundColor(.white)
+                            Text(errorMessage)
+                                .font(DADSTypography.caption)
+                                .foregroundColor(.white)
+                        }
+                        .padding(DADSSpacing.md)
+                        .background(DADSColor.error)
+                        .cornerRadius(DADSRadius.medium)
+                        .shadow(
+                            color: DADSShadow.medium.color,
+                            radius: DADSShadow.medium.radius,
+                            x: DADSShadow.medium.x,
+                            y: DADSShadow.medium.y
+                        )
+                        .padding(DADSSpacing.md)
+                    }
+                }
+            }
+            .navigationTitle("写真保管庫")
+            .navigationBarTitleDisplayMode(.large)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: { showingUploadSheet = true }) {
+                        Image(systemName: "plus.circle.fill")
+                            .font(.title2)
+                            .foregroundColor(DADSColor.primary)
+                    }
+                    .accessibilityLabel("写真をアップロード")
+                }
+            }
+            .sheet(isPresented: $showingUploadSheet) {
+                UploadPhotoView(viewModel: viewModel)
+            }
+            .task {
+                await viewModel.refresh()
+            }
+        }
+        .accentColor(DADSColor.primary)
+    }
+}
+
+struct StatsView: View {
+    let stats: PhotoStats
+
+    var body: some View {
+        VStack(spacing: DADSSpacing.md) {
+            Text("統計情報")
+                .font(DADSTypography.title3)
+                .foregroundColor(DADSColor.textPrimary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+            LazyVGrid(columns: [
+                GridItem(.flexible(), spacing: DADSSpacing.md),
+                GridItem(.flexible(), spacing: DADSSpacing.md)
+            ], spacing: DADSSpacing.md) {
+                StatCard(title: "総写真数", value: "\(stats.totalPhotos)")
+                StatCard(title: "総容量", value: stats.formattedTotalSize)
+                StatCard(title: "アーカイブ済み", value: "\(stats.archived)")
+                StatCard(title: "復元可能", value: "\(stats.restored)")
+            }
+        }
+        .padding(DADSSpacing.md)
+        .background(DADSColor.backgroundCard)
+        .cornerRadius(DADSRadius.large)
+        .shadow(
+            color: DADSShadow.small.color,
+            radius: DADSShadow.small.radius,
+            x: DADSShadow.small.x,
+            y: DADSShadow.small.y
+        )
+    }
+}
+
+struct StatCard: View {
+    let title: String
+    let value: String
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: DADSSpacing.xxs) {
+            Text(title)
+                .font(DADSTypography.small)
+                .foregroundColor(DADSColor.textSecondary)
+            Text(value)
+                .font(DADSTypography.title2)
+                .fontWeight(.bold)
+                .foregroundColor(DADSColor.textPrimary)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(DADSSpacing.md)
+        .background(DADSColor.backgroundGray)
+        .cornerRadius(DADSRadius.medium)
+    }
+}
+
+struct EmptyStateView: View {
+    var body: some View {
+        VStack(spacing: DADSSpacing.lg) {
+            Image(systemName: "photo.on.rectangle.angled")
+                .font(.system(size: 64))
+                .foregroundColor(DADSColor.textDisabled)
+
+            VStack(spacing: DADSSpacing.xs) {
+                Text("写真がまだありません")
+                    .font(DADSTypography.title3)
+                    .foregroundColor(DADSColor.textPrimary)
+
+                Text("右上の + ボタンから写真をアップロードしてください")
+                    .font(DADSTypography.caption)
+                    .foregroundColor(DADSColor.textSecondary)
+                    .multilineTextAlignment(.center)
+                    .lineSpacing(4)
+            }
+        }
+        .padding(DADSSpacing.xxl)
+        .frame(maxWidth: .infinity)
+        .background(DADSColor.backgroundCard)
+        .cornerRadius(DADSRadius.large)
+        .shadow(
+            color: DADSShadow.small.color,
+            radius: DADSShadow.small.radius,
+            x: DADSShadow.small.x,
+            y: DADSShadow.small.y
+        )
+    }
+}
+
+#Preview {
+    ContentView()
+}
