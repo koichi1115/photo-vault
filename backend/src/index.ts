@@ -3,11 +3,14 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
 import { SessionManager } from './services/SessionManager';
 import { setupSocketHandlers } from './socket/handlers';
 import photoRoutes from './routes/photoRoutes';
 
-dotenv.config();
+// Load .env from project root (two levels up from backend/src)
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+console.log('📁 Loading .env from:', path.resolve(__dirname, '../../.env'));
 
 const app = express();
 const httpServer = createServer(app);
