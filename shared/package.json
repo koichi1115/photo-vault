@@ -1,7 +1,7 @@
 {
-  "name": "@ai-brainstorm/shared",
+  "name": "@glacier-photo-vault/shared",
   "version": "1.0.0",
-  "description": "Shared types and utilities",
+  "description": "Shared types and utilities for Glacier Photo Vault",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {

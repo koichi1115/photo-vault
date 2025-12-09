@@ -1,5 +1,5 @@
 {
-  "name": "@ai-brainstorm/frontend",
+  "name": "@glacier-photo-vault/frontend",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@ai-brainstorm/shared": "*",
+    "@glacier-photo-vault/shared": "*",
     "@react-three/fiber": "^8.15.12",
     "@react-three/drei": "^9.92.7",
     "three": "^0.160.0",

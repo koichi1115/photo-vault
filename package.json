@@ -1,7 +1,7 @@
 {
-  "name": "ai-brainstorm-service",
+  "name": "glacier-photo-vault",
   "version": "1.0.0",
-  "description": "AI-powered collaborative brainstorming service with real-time idea aggregation and facilitation",
+  "description": "AWS Glacier Deep Archive photo storage service",
   "private": true,
   "workspaces": [
     "backend",
