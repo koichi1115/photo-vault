@@ -35,8 +35,8 @@ const sessionManager = new SessionManager();
 // Setup WebSocket handlers
 setupSocketHandlers(io, sessionManager);
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 httpServer.listen(PORT, () => {
-  console.log(`🚀 AI Brainstorm Server running on port ${PORT}`);
+  console.log(`📦 Glacier Photo Vault Server running on port ${PORT}`);
 });
