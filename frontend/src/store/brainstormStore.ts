@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { io, Socket } from 'socket.io-client';
-import { Session, User, Idea, IdeaGroup, AgentMessage } from '@ai-brainstorm/shared';
+import { Session, User, Idea, IdeaGroup, AgentMessage } from '@glacier-photo-vault/shared';
 
 interface BrainstormState {
   socket: Socket | null;

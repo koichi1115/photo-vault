@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { Photo, PhotoStatus } from '@ai-brainstorm/shared';
+import { Photo, PhotoStatus } from '@glacier-photo-vault/shared';
 import { DADSColors, DADSSpacing, DADSRadius, DADSShadow, getStatusColor } from '../design-system/tokens';
 import '../design-system/global.css';
 

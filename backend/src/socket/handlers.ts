@@ -1,6 +1,6 @@
 import { Server, Socket } from 'socket.io';
 import { SessionManager } from '../services/SessionManager';
-import { MessageType, WebSocketMessage, User, Idea, IdeaGroup } from '@ai-brainstorm/shared';
+import { MessageType, WebSocketMessage, User, Idea, IdeaGroup } from '@glacier-photo-vault/shared';
 import { v4 as uuidv4 } from 'uuid';
 import { AIAgentService } from '../services/AIAgentService';
 

@@ -1,4 +1,4 @@
-import { Session, User, Idea, IdeaGroup } from '@ai-brainstorm/shared';
+import { Session, User, Idea, IdeaGroup } from '@glacier-photo-vault/shared';
 import { v4 as uuidv4 } from 'uuid';
 
 export class SessionManager {

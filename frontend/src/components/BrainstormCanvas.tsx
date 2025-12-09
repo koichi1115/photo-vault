@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { useBrainstormStore } from '../store/brainstormStore';
-import { Idea, IdeaGroup } from '@ai-brainstorm/shared';
+import { Idea, IdeaGroup } from '@glacier-photo-vault/shared';
 import { IdeaSphere } from './IdeaSphere';
 import { GroupSphere } from './GroupSphere';
 import { Toolbar } from './Toolbar';

@@ -1,5 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk';
-import { Session, Idea, AgentMessage } from '@ai-brainstorm/shared';
+import { Session, Idea, AgentMessage } from '@glacier-photo-vault/shared';
 import { v4 as uuidv4 } from 'uuid';
 
 export class AIAgentService {

@@ -1,5 +1,5 @@
 import { Line } from '@react-three/drei';
-import { Session, IdeaGroup, Idea } from '@ai-brainstorm/shared';
+import { Session, IdeaGroup, Idea } from '@glacier-photo-vault/shared';
 
 interface ConnectionLinesProps {
   session: Session | null;

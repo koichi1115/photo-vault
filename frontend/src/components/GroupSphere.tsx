@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Text, Sphere } from '@react-three/drei';
 import { Mesh } from 'three';
-import { IdeaGroup } from '@ai-brainstorm/shared';
+import { IdeaGroup } from '@glacier-photo-vault/shared';
 
 interface GroupSphereProps {
   group: IdeaGroup;

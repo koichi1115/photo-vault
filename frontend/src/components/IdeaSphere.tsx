@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Text, Sphere } from '@react-three/drei';
 import { Mesh } from 'three';
-import { Idea } from '@ai-brainstorm/shared';
+import { Idea } from '@glacier-photo-vault/shared';
 
 interface IdeaSphereProps {
   idea: Idea;
