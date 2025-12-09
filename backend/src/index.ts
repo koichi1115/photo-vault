@@ -8,9 +8,16 @@ import { SessionManager } from './services/SessionManager';
 import { setupSocketHandlers } from './socket/handlers';
 import photoRoutes from './routes/photoRoutes';
 
-// Load .env from project root (two levels up from backend/src)
-dotenv.config({ path: path.resolve(__dirname, '../../.env') });
-console.log('📁 Loading .env from:', path.resolve(__dirname, '../../.env'));
+// Load .env from project root using process.cwd() instead of __dirname
+const envPath = path.join(process.cwd(), '.env');
+console.log('📁 Loading .env from:', envPath);
+const result = dotenv.config({ path: envPath });
+if (result.error) {
+  console.error('❌ Error loading .env:', result.error);
+} else {
+  console.log('✅ .env loaded successfully');
+  console.log('📊 Loaded keys:', Object.keys(result.parsed || {}).join(', '));
+}
 
 const app = express();
 const httpServer = createServer(app);
